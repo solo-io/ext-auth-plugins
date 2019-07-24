@@ -6,5 +6,6 @@ RUN go get ./example/...
 RUN CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -o AuthorizeAll.so example/authorize-all/plugin.go
 
 FROM alpine
-RUN mkdir /auth-plugins
-COPY --from=build-env /go/src/github.com/solo-io/ext-auth-plugins/AuthorizeAll.so /auth-plugins/
+RUN mkdir /compiled-auth-plugins
+COPY --from=build-env /go/src/github.com/solo-io/ext-auth-plugins/AuthorizeAll.so /compiled-auth-plugins/
+CMD cp /compiled-auth-plugins/* /auth-plugins/
