@@ -161,6 +161,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/envoyproxy/go-control-plane/envoy/service/auth/v2",
+    "github.com/envoyproxy/go-control-plane/envoy/type",
     "github.com/gogo/googleapis/google/rpc",
   ]
   solver-name = "gps-cdcl"

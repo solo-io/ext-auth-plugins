@@ -2,8 +2,10 @@ package api
 
 import (
 	"context"
+	"github.com/envoyproxy/go-control-plane/envoy/api/v2/core"
 
 	pb "github.com/envoyproxy/go-control-plane/envoy/service/auth/v2"
+	envoytype "github.com/envoyproxy/go-control-plane/envoy/type"
 	googlerpc "github.com/gogo/googleapis/google/rpc"
 )
 
@@ -38,6 +40,31 @@ func UnauthorizedResponse() *AuthorizationResponse {
 			Status: &googlerpc.Status{
 				Code: int32(googlerpc.PERMISSION_DENIED),
 			},
+		},
+	}
+}
+
+func InternalServerErrorResponse() *AuthorizationResponse {
+	resp := UnauthorizedResponse()
+	resp.CheckResponse.HttpResponse = &pb.CheckResponse_DeniedResponse{
+		DeniedResponse: &pb.DeniedHttpResponse{
+			Status: &envoytype.HttpStatus{
+				Code: envoytype.StatusCode_InternalServerError,
+			},
+		},
+	}
+
+	return resp
+}
+
+func FoundDeniedResponse(headers ...*core.HeaderValueOption) *AuthorizationResponse {
+	resp := UnauthorizedResponse()
+	resp.CheckResponse.HttpResponse = &pb.CheckResponse_DeniedResponse{
+		DeniedResponse: &pb.DeniedHttpResponse{
+			Status: &envoytype.HttpStatus{
+				Code: envoytype.StatusCode_Found,
+			},
+			Headers: headers,
 		},
 	}
 }
