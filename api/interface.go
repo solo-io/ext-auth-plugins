@@ -56,15 +56,3 @@ func InternalServerErrorResponse() *AuthorizationResponse {
 
 	return resp
 }
-
-func FoundDeniedResponse(headers ...*core.HeaderValueOption) *AuthorizationResponse {
-	resp := UnauthorizedResponse()
-	resp.CheckResponse.HttpResponse = &pb.CheckResponse_DeniedResponse{
-		DeniedResponse: &pb.DeniedHttpResponse{
-			Status: &envoytype.HttpStatus{
-				Code: envoytype.StatusCode_Found,
-			},
-			Headers: headers,
-		},
-	}
-}
