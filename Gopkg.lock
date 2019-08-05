@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:83f44b4d3e25f5e1f6bcf7b1ecf4e411203bbf1bbbbd4b27c2b7d63c816f449e"
+  digest = "1:ecc02fd1cd4271f72de647d2bfd8a08f894d9135da4cbd94d1f01311f3a5b9fa"
   name = "github.com/envoyproxy/go-control-plane"
   packages = [
     "envoy/api/v2/core",
@@ -10,8 +10,16 @@
     "envoy/type",
   ]
   pruneopts = "UT"
-  revision = "0ad6fa1cf0b9b6ca8f3617a7188a568e81f40b87"
-  version = "v0.6.9"
+  revision = "b817a5450138810b94c4cbcfa02887d08fc92f53"
+  version = "v0.8.4"
+
+[[projects]]
+  digest = "1:743f8008a7fed04ef0d52261aef346766bbd5b3e360b90296d85289f8ef5c2e2"
+  name = "github.com/envoyproxy/protoc-gen-validate"
+  packages = ["validate"]
+  pruneopts = "UT"
+  revision = "9eff07ddfcb4001aa1aab280648153f46e1a8ddc"
+  version = "v0.1.0"
 
 [[projects]]
   digest = "1:fa6faf4a2977dc7643de38ae599a95424d82f8ffc184045510737010a82c4ecd"
@@ -63,14 +71,6 @@
   pruneopts = "UT"
   revision = "a30252cb686a21eb2d0b98132633053ec2f7f1e5"
   version = "v1.0.0"
-
-[[projects]]
-  digest = "1:fd54bf7b2ed868354f34178c1d81930250bf978901ad7b0dc649223d79356ae7"
-  name = "github.com/lyft/protoc-gen-validate"
-  packages = ["validate"]
-  pruneopts = "UT"
-  revision = "ff6f7a9bc2e5fe006509b9f8c7594c41a953d50f"
-  version = "v0.0.14"
 
 [[projects]]
   digest = "1:e9c3bb68a6c9470302b8046d4647e0612a2ea6037b9c6a47de60c0a90db504f8"
@@ -299,6 +299,14 @@
   pruneopts = "UT"
   revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
   version = "v2.2.2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fb7538d4abbc4653bbcc9814ffaf916448905d53a4ebd4ce8f248732fa5fea68"
+  name = "istio.io/gogo-genproto"
+  packages = ["googleapis/google/rpc"]
+  pruneopts = "UT"
+  revision = "c882b6a1ea3540a84af0687bf7266be300a6902b"
 
 [solve-meta]
   analyzer-name = "dep"
