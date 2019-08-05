@@ -17,6 +17,7 @@ type AuthorizationResponse struct {
 	CheckResponse pb.CheckResponse
 }
 
+// TODO: add ctx to start
 type AuthClient interface {
 	Start()
 	Authorize(ctx context.Context, request *pb.CheckRequest) (*AuthorizationResponse, error)
