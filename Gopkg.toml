@@ -24,14 +24,13 @@
 #   go-tests = true
 #   unused-packages = true
 
-
-[[constraint]]
-  name = "github.com/envoyproxy/go-control-plane"
-  version = ">=0.8.2"
-
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  version = "=0.8.2"
+  name = "github.com/envoyproxy/go-control-plane"
 
 [[override]]
   name = "gopkg.in/fsnotify.v1"
@@ -39,4 +38,10 @@
 
 [[constraint]]
   name = "github.com/solo-io/go-utils"
-  version = "0.9.1"
+  version = "0.9.12"
+
+[[override]]
+  # use v0.0.15 when it is released
+  # version = "v0.0.15"
+  revision = "9b492f1473afa33350d86b62c298b45da868a33f"
+  name = "github.com/envoyproxy/protoc-gen-validate"

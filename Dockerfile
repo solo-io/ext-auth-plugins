@@ -3,8 +3,8 @@ RUN apk add --no-cache gcc musl-dev
 ADD . /go/src/github.com/solo-io/ext-auth-plugins/
 WORKDIR /go/src/github.com/solo-io/ext-auth-plugins
 RUN go get ./example/...
-RUN CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -o AuthorizeAll.so example/authorize-all/plugin.go
-RUN CGO_ENABLED=0 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -o RequiredHeader.so example/header/plugin.go
+RUN CGO_ENABLED=1 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -o AuthorizeAll.so example/authorize-all/plugin.go
+RUN CGO_ENABLED=1 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -o RequiredHeader.so example/header/plugin.go
 
 FROM alpine
 RUN mkdir /compiled-auth-plugins
