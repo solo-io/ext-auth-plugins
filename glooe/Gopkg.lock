@@ -1315,7 +1315,7 @@
   name = "github.com/solo-io/ext-auth-plugins"
   packages = ["api"]
   pruneopts = "UT"
-  revision = "aedee29d2c7851b2cac71e31ce38ec71d885dce3"
+  revision = "e636f3256c2264ad9dc56cb6eb9c38ebce39913e"
 
 [[projects]]
   branch = "ext-auth-plugin"

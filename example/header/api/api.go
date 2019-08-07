@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/solo-io/ext-auth-plugins/api"
 	"github.com/solo-io/go-utils/contextutils"
+	"google.golang.org/grpc"
 )
 
 type RequiredHeaderPlugin struct {
@@ -29,6 +30,7 @@ type RequiredHeaderClient struct {
 }
 
 func (c *RequiredHeaderClient) Start() {
+	_ = grpc.NewServer()
 	// no-op
 }
 

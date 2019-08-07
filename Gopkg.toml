@@ -61,3 +61,8 @@
 [[override]]
   name = "google.golang.org/genproto"
   revision = "02b4e95473316948020af0b7a4f0f22c73929b0e"
+
+
+[[constraint]]
+  name = "google.golang.org/grpc"
+  version = "1.14.0"
