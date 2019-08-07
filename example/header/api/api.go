@@ -4,12 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	v2 "github.com/envoyproxy/go-control-plane/envoy/service/auth/v2"
 	"github.com/solo-io/ext-auth-plugins/api"
 	"github.com/solo-io/go-utils/contextutils"
 )
 
-//
 type RequiredHeaderPlugin struct {
 	RequiredHeader string
 }
@@ -34,13 +32,14 @@ func (c *RequiredHeaderClient) Start() {
 	// no-op
 }
 
-func (c *RequiredHeaderClient) Authorize(ctx context.Context, request *v2.CheckRequest) (*api.AuthorizationResponse, error) {
-	for key, value := range request.Attributes.Request.Http.Headers {
-		if key == c.RequiredHeader {
-			contextutils.LoggerFrom(ctx).Infow("found required header", "header", key, "value", value)
-			return api.AuthorizedResponse(), nil
-		}
-	}
-	contextutils.LoggerFrom(ctx).Infow("required header not found, denying access")
-	return api.UnauthorizedResponse(), nil
+func (c *RequiredHeaderClient) Authorize(ctx context.Context, request *api.Request) (*api.AuthorizationResponse, error) {
+	//for key, value := range request.Attributes.Request.Http.Headers {
+	//	if key == c.RequiredHeader {
+	//		contextutils.LoggerFrom(ctx).Infow("found required header", "header", key, "value", value)
+	//		return api.AuthorizedResponse(), nil
+	//	}
+	//}
+	//contextutils.LoggerFrom(ctx).Infow("required header not found, denying access")
+	contextutils.LoggerFrom(ctx).Infow("allowing all")
+	return api.AuthorizedResponse(), nil
 }

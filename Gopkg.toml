@@ -2,10 +2,6 @@
   go-tests = true
   unused-packages = true
 
-[[constraint]]
-  version = "=0.8.2"
-  name = "github.com/envoyproxy/go-control-plane"
-
 [[override]]
   name = "gopkg.in/fsnotify.v1"
   source = "https://github.com/fsnotify/fsnotify.git"
@@ -61,18 +57,6 @@
 [[override]]
   name = "github.com/pelletier/go-toml"
   version = "=v1.2.0"
-
-[[override]]
-  name = "golang.org/x/net"
-  revision = "3f473d35a33aa6fdd203e306dc439b797820e3f1"
-
-[[override]]
-  name = "golang.org/x/sys"
-  revision = "ac767d655b305d4e9612f5f6e33120b9176c4ad4"
-
-[[override]]
-  name = "golang.org/x/text"
-  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
 
 [[override]]
   name = "google.golang.org/genproto"
