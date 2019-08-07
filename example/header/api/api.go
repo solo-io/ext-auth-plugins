@@ -15,12 +15,11 @@ type RequiredHeaderPlugin struct {
 }
 
 func (p *RequiredHeaderPlugin) NewConfigInstance(ctx context.Context) interface{} {
-	fmt.Println("called new instance")
-	return RequiredHeaderPlugin{}
+	return &RequiredHeaderPlugin{}
 }
 
 func (p *RequiredHeaderPlugin) GetAuthClient(ctx context.Context, configInstance interface{}) (api.AuthClient, error) {
-	config, ok := configInstance.(RequiredHeaderPlugin)
+	config, ok := configInstance.(*RequiredHeaderPlugin)
 	if !ok {
 		return nil, errors.New(fmt.Sprintf("unexpected config type %T", configInstance))
 	}
