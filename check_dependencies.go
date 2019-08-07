@@ -32,7 +32,7 @@ func (d dependencyInfo) matches(that dependencyInfo) bool {
 	return false
 }
 
-// TODO(marco): would be nice if this script could generate the snippets that the user needs to add to their Gopkg.toml
+// TODO(marco): would be nice if this script would generate the snippets that the user needs to add to their Gopkg.toml
 func main() {
 
 	pluginDependencies := getPluginDependencies()
