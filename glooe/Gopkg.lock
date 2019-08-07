@@ -1315,7 +1315,7 @@
   name = "github.com/solo-io/ext-auth-plugins"
   packages = ["api"]
   pruneopts = "UT"
-  revision = "e636f3256c2264ad9dc56cb6eb9c38ebce39913e"
+  revision = "4b747beea5c29a5b14f81efad5630ea52cdf6752"
 
 [[projects]]
   branch = "ext-auth-plugin"
@@ -1329,7 +1329,7 @@
     "pkg/service",
   ]
   pruneopts = "UT"
-  revision = "fa8fb353dcff22fa4f663d864c99f5bca44ada4c"
+  revision = "6ef238ff433a611c3fdeb79a545617065ed1f1da"
 
 [[projects]]
   digest = "1:7b340eb324d83602fdd1593c19b0e3af6a73716b2988ebdfed0a9103a4d1477c"
@@ -1963,16 +1963,18 @@
   revision = "02b4e95473316948020af0b7a4f0f22c73929b0e"
 
 [[projects]]
-  digest = "1:c4e17550279fea4bf342e63ed6a0491722463708f991cfdad63859b6ee77cbeb"
+  digest = "1:8311f6a328d9c7d0be5365e600c38a99e2a2caccb3175a45db057718ed8b8368"
   name = "google.golang.org/grpc"
   packages = [
     ".",
     "balancer",
     "balancer/base",
     "balancer/roundrobin",
+    "binarylog/grpc_binarylog_v1",
     "codes",
     "connectivity",
     "credentials",
+    "credentials/internal",
     "credentials/oauth",
     "encoding",
     "encoding/proto",
@@ -1981,8 +1983,14 @@
     "health/grpc_health_v1",
     "internal",
     "internal/backoff",
+    "internal/balancerload",
+    "internal/binarylog",
     "internal/channelz",
+    "internal/envconfig",
     "internal/grpcrand",
+    "internal/grpcsync",
+    "internal/syscall",
+    "internal/transport",
     "keepalive",
     "metadata",
     "naming",
@@ -1992,15 +2000,15 @@
     "resolver",
     "resolver/dns",
     "resolver/passthrough",
+    "serviceconfig",
     "stats",
     "status",
     "tap",
     "test/bufconn",
-    "transport",
   ]
   pruneopts = "UT"
-  revision = "168a6198bcb0ef175f7dacec0b8691fc141dc9b8"
-  version = "v1.13.0"
+  revision = "045159ad57f3781d409358e3ade910a018c16b30"
+  version = "v1.22.1"
 
 [[projects]]
   digest = "1:8aebecf08fbcb288d879a0e21de4636389c2bc58ab45789a05d7f7e94577482f"

@@ -48,7 +48,7 @@
 
 [[override]]
   name = "google.golang.org/grpc"
-  version = "=v1.13.0"
+  revision = "045159ad57f3781d409358e3ade910a018c16b30"
 
 [[override]]
   name = "github.com/gogo/googleapis"
@@ -61,8 +61,3 @@
 [[override]]
   name = "google.golang.org/genproto"
   revision = "02b4e95473316948020af0b7a4f0f22c73929b0e"
-
-
-[[constraint]]
-  name = "google.golang.org/grpc"
-  version = "1.14.0"
