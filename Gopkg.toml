@@ -15,6 +15,10 @@
   version = "=v0.8.2"
 
 [[override]]
+  name = "github.com/envoyproxy/protoc-gen-validate"
+  revision = "9b492f1473afa33350d86b62c298b45da868a33f"
+
+[[override]]
   name = "go.uber.org/zap"
   version = "=v1.9.0"
 
@@ -25,10 +29,6 @@
 [[override]]
   name = "github.com/golang/protobuf"
   version = "=v1.2.0"
-
-[[override]]
-  revision = "9b492f1473afa33350d86b62c298b45da868a33f"
-  name = "github.com/envoyproxy/protoc-gen-validate"
 
 [[override]]
   name = "gopkg.in/tomb.v1"
@@ -52,7 +52,7 @@
 
 [[override]]
   name = "google.golang.org/grpc"
-  revision = "045159ad57f3781d409358e3ade910a018c16b30"
+  revision = "168a6198bcb0ef175f7dacec0b8691fc141dc9b8"
 
 [[override]]
   name = "github.com/gogo/googleapis"
@@ -65,3 +65,15 @@
 [[override]]
   name = "google.golang.org/genproto"
   revision = "02b4e95473316948020af0b7a4f0f22c73929b0e"
+
+[[override]]
+  name = "golang.org/x/sys"
+  revision = "ac767d655b305d4e9612f5f6e33120b9176c4ad4"
+
+[[override]]
+  name = "golang.org/x/net"
+  revision = "3f473d35a33aa6fdd203e306dc439b797820e3f1"
+
+[[override]]
+  name = "golang.org/x/text"
+  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
