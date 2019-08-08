@@ -10,6 +10,10 @@
   name = "github.com/solo-io/go-utils"
   version = "=v0.9.13"
 
+[[constraint]]
+  name = "github.com/envoyproxy/go-control-plane"
+  version = "=v0.8.2"
+
 [[override]]
   name = "go.uber.org/zap"
   version = "=v1.9.0"

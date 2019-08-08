@@ -19,7 +19,7 @@ var _ = Describe("Plugin", func() {
 		pluginStructPtr, err := goPlugin.Lookup("Plugin")
 		Expect(err).NotTo(HaveOccurred())
 
-		extAuthPlugin, ok := pluginStructPtr.(api.ExtauthPlugin)
+		extAuthPlugin, ok := pluginStructPtr.(api.ExtAuthPlugin)
 		Expect(ok).To(BeTrue())
 
 		instance := extAuthPlugin.NewConfigInstance(context.TODO())

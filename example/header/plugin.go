@@ -7,7 +7,7 @@ import (
 
 func main() {}
 
-var _ authapi.ExtauthPlugin = new(api.RequiredHeaderPlugin)
+var _ authapi.ExtAuthPlugin = new(api.RequiredHeaderPlugin)
 
 //noinspection GoUnusedGlobalVariable
 var Plugin api.RequiredHeaderPlugin
