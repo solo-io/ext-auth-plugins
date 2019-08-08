@@ -9,5 +9,5 @@ import (
 
 func TestHeader(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Header Suite")
+	RunSpecs(t, "RequiredHeader Suite")
 }

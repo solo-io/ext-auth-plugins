@@ -9,16 +9,20 @@ import (
 	"github.com/solo-io/go-utils/contextutils"
 )
 
-type RequiredHeaderPlugin struct {
+var _ api.ExtAuthPlugin = new(RequiredHeaderPlugin)
+
+type RequiredHeaderPlugin struct{}
+
+type RequiredHeaderPluginConfig struct {
 	RequiredHeader string
 }
 
-func (p *RequiredHeaderPlugin) NewConfigInstance(ctx context.Context) interface{} {
-	return &RequiredHeaderPlugin{}
+func (p *RequiredHeaderPlugin) NewConfigInstance(ctx context.Context) (interface{}, error) {
+	return &RequiredHeaderPluginConfig{}, nil
 }
 
-func (p *RequiredHeaderPlugin) GetAuthClient(ctx context.Context, configInstance interface{}) (api.AuthClient, error) {
-	config, ok := configInstance.(*RequiredHeaderPlugin)
+func (p *RequiredHeaderPlugin) GetAuthService(ctx context.Context, configInstance interface{}) (api.AuthService, error) {
+	config, ok := configInstance.(*RequiredHeaderPluginConfig)
 	if !ok {
 		return nil, errors.New(fmt.Sprintf("unexpected config type %T", configInstance))
 	}
@@ -29,8 +33,9 @@ type RequiredHeaderClient struct {
 	RequiredHeader string
 }
 
-func (c *RequiredHeaderClient) Start(context.Context) {
+func (c *RequiredHeaderClient) Start(context.Context) error {
 	// no-op
+	return nil
 }
 
 func (c *RequiredHeaderClient) Authorize(ctx context.Context, request *v2.CheckRequest) (*api.AuthorizationResponse, error) {

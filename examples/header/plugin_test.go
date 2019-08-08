@@ -5,7 +5,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/solo-io/ext-auth-plugins/api"
-	api2 "github.com/solo-io/ext-auth-plugins/example/header/api"
+	api2 "github.com/solo-io/ext-auth-plugins/examples/header/api"
 	"plugin"
 )
 
@@ -22,9 +22,10 @@ var _ = Describe("Plugin", func() {
 		extAuthPlugin, ok := pluginStructPtr.(api.ExtAuthPlugin)
 		Expect(ok).To(BeTrue())
 
-		instance := extAuthPlugin.NewConfigInstance(context.TODO())
+		instance, err := extAuthPlugin.NewConfigInstance(context.TODO())
+		Expect(err).NotTo(HaveOccurred())
 
-		typedInstance, ok := instance.(api2.RequiredHeaderPlugin)
+		typedInstance, ok := instance.(*api2.RequiredHeaderPluginConfig)
 		Expect(ok).To(BeTrue())
 
 		Expect(typedInstance.RequiredHeader).To(BeEmpty())

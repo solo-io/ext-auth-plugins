@@ -16,18 +16,19 @@ var _ api.ExtAuthPlugin = new(AuthorizeAllPlugin)
 
 type AuthorizeAllPlugin struct{}
 
-func (p *AuthorizeAllPlugin) NewConfigInstance(ctx context.Context) interface{} {
-	return nil
+func (p *AuthorizeAllPlugin) NewConfigInstance(ctx context.Context) (interface{}, error) {
+	return &struct{}{}, nil
 }
 
-func (p *AuthorizeAllPlugin) GetAuthClient(ctx context.Context, configInstance interface{}) (api.AuthClient, error) {
+func (p *AuthorizeAllPlugin) GetAuthService(ctx context.Context, configInstance interface{}) (api.AuthService, error) {
 	return &AuthorizeAllClient{}, nil
 }
 
 type AuthorizeAllClient struct{}
 
-func (c *AuthorizeAllClient) Start(context.Context) {
+func (c *AuthorizeAllClient) Start(context.Context) error {
 	// no-op
+	return nil
 }
 
 func (c *AuthorizeAllClient) Authorize(ctx context.Context, request *envoyauthv2.CheckRequest) (*api.AuthorizationResponse, error) {
