@@ -2,10 +2,17 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/pelletier/go-toml"
 	"io/ioutil"
 	"os"
+)
+
+const (
+	depLockFile      = "Gopkg.lock"
+	glooeDepLockFile = "GlooE-Gopkg.lock"
+	errorReportFile  = "mismatched_dependencies.json"
 )
 
 type depProjects map[string]dependencyInfo
@@ -32,11 +39,18 @@ func (d dependencyInfo) matches(that dependencyInfo) bool {
 	return false
 }
 
-// TODO(marco): would be nice if this script would generate the snippets that the user needs to add to their Gopkg.toml
 func main() {
 
-	pluginDependencies := getPluginDependencies()
-	glooeDependencies := getGlooeDependencies()
+	pluginDependencies, err := getDependencies(depLockFile)
+	if err != nil {
+		fmt.Printf("Failed to get plugin dependencies: %s/n", err.Error())
+		os.Exit(1)
+	}
+	glooeDependencies, err := getDependencies(glooeDepLockFile)
+	if err != nil {
+		fmt.Printf("Failed to get GlooE dependencies: %s/n", err.Error())
+		os.Exit(1)
+	}
 
 	var nonMatchingDeps []dependencyInfoPair
 	for name, depInfo := range pluginDependencies {
@@ -52,43 +66,40 @@ func main() {
 		}
 	}
 
-	if len(nonMatchingDeps) > 0 {
+	if len(nonMatchingDeps) == 0 {
+		fmt.Println("All shared dependencies match")
+		os.Exit(0)
+	}
 
-		reportBytes, err := json.Marshal(nonMatchingDeps)
-		if err != nil {
-			panic(err)
-		}
+	fmt.Printf("Plugin and GlooE dependencies do not match!\n")
 
-		if err := ioutil.WriteFile("mismatched_dependencies.json", reportBytes, 0644); err != nil {
-			panic(err)
-		}
-
+	reportBytes, err := json.MarshalIndent(nonMatchingDeps, "", "  ")
+	if err != nil {
+		fmt.Printf("Failed to marshall error report to JSON: %s/n", err.Error())
 		os.Exit(1)
 	}
 
-	os.Exit(0)
+	fmt.Println(string(reportBytes))
+
+	fmt.Printf("Writing error report file [%s]\n", errorReportFile)
+	if err := ioutil.WriteFile(errorReportFile, reportBytes, 0644); err != nil {
+		fmt.Printf("Failed to write error report file: %s/n", err.Error())
+	}
+	os.Exit(1)
 }
 
-func getPluginDependencies() depProjects {
-	pluginDependencies, err := parseGoPkgLock("Gopkg.lock")
+func getDependencies(depLockFilePath string) (depProjects, error) {
+	pluginDependencies, err := parseGoPkgLock(depLockFilePath)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	return collectDependencyInfo(pluginDependencies)
-}
-
-func getGlooeDependencies() depProjects {
-	pluginDependencies, err := parseGoPkgLock("glooe/Gopkg.lock")
-	if err != nil {
-		panic(err)
-	}
-	return collectDependencyInfo(pluginDependencies)
+	return collectDependencyInfo(pluginDependencies), nil
 }
 
 func parseGoPkgLock(path string) ([]*toml.Tree, error) {
 	config, err := toml.LoadFile(path)
 	if err != nil {
-		return nil, err
+		return nil, errors.New(fmt.Sprintf("failed to parse %s file: %s", path, err.Error()))
 	}
 
 	tomlTree := config.Get("projects")
