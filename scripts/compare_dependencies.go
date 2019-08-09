@@ -41,7 +41,25 @@ func (d dependencyInfo) matches(that dependencyInfo) bool {
 
 func main() {
 
-	pluginDependencies, err := getDependencies(depLockFile)
+	if len(os.Args) != 3 {
+		fmt.Printf("Must provide 2 arguments: \n\t- plugin Gopkg.lock file path \n\t- Glooe Gopkg.lock file path\n")
+		os.Exit(1)
+	}
+
+	pluginDepLockFile := os.Args[1]
+	glooeDepLockFile := os.Args[2]
+
+	if err := checkFile(pluginDepLockFile); err != nil {
+		fmt.Printf("%s\n", err.Error())
+		os.Exit(1)
+	}
+
+	if err := checkFile(glooeDepLockFile); err != nil {
+		fmt.Printf("%s\n", err.Error())
+		os.Exit(1)
+	}
+
+	pluginDependencies, err := getDependencies(pluginDepLockFile)
 	if err != nil {
 		fmt.Printf("Failed to get plugin dependencies: %s/n", err.Error())
 		os.Exit(1)
@@ -134,4 +152,15 @@ func collectDependencyInfo(deps []*toml.Tree) depProjects {
 		dependencies[name] = info
 	}
 	return dependencies
+}
+
+func checkFile(filename string) error {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return errors.New(filename + " file not found")
+	}
+	if info.IsDir() {
+		return errors.New(filename + " is a directory")
+	}
+	return nil
 }

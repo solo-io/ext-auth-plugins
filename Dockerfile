@@ -1,7 +1,6 @@
 FROM golang:1.12.7-alpine AS build-env
 RUN apk add --no-cache gcc musl-dev git
 
-# TODO(marco): gopath has to be a param
 ADD . /go/src/github.com/solo-io/ext-auth-plugins/
 WORKDIR /go/src/github.com/solo-io/ext-auth-plugins
 
