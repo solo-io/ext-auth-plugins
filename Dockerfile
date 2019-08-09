@@ -1,11 +1,12 @@
 FROM golang:1.12.7-alpine AS build-env
+
 RUN apk add --no-cache gcc musl-dev git
 
 ADD . /go/src/github.com/solo-io/ext-auth-plugins/
 WORKDIR /go/src/github.com/solo-io/ext-auth-plugins
 
 # TODO(marco): check if we really need this
-RUN go get ./examples/...
+RUN go get ./...
 
 # Go get `golang.org/x/net/trace` and remove it from vendor.
 # If this package is initialized more than once, it causes a panic (see issue: https://github.com/golang/go/issues/24137).

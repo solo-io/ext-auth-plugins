@@ -5,7 +5,7 @@ import (
 
 	envoyauthv2 "github.com/envoyproxy/go-control-plane/envoy/service/auth/v2"
 	envoytype "github.com/envoyproxy/go-control-plane/envoy/type"
-	googlerpc "github.com/gogo/googleapis/google/rpc"
+	"github.com/gogo/googleapis/google/rpc"
 )
 
 // Response returned by authorization services to the Gloo ext-auth server
@@ -98,8 +98,8 @@ func AuthorizedResponse() *AuthorizationResponse {
 func UnauthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
 		CheckResponse: envoyauthv2.CheckResponse{
-			Status: &googlerpc.Status{
-				Code: int32(googlerpc.PERMISSION_DENIED),
+			Status: &rpc.Status{
+				Code: int32(rpc.PERMISSION_DENIED),
 			},
 		},
 	}

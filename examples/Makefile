@@ -3,18 +3,18 @@
 #----------------------------------------------------------------------------------
 REPO_ROOT=./..
 SOURCES=$(shell find . -name "*.go" | grep -v test)
-TAG := dev
+TAG := test-plugin-1
 
 .PHONY: publish-examples
 publish-examples: test-examples
 	cd $(REPO_ROOT) && docker build -t quay.io/solo-io/ext-auth-plugins:$(TAG) .
-	cd $(REPO_ROOT) && docker push quay.io/solo-io/ext-auth-plugins:$(TAG)
+	docker push quay.io/solo-io/ext-auth-plugins:$(TAG)
 
 .PHONY: test-examples
-test-examples: build-examples
+test-examples: build-examples-for-tests
 	ginkgo ./...
 
-.PHONY: build-examples
-build-examples: $(SOURCES)
+.PHONY: build-examples-for-tests
+build-examples-for-tests: $(SOURCES)
 	go build -buildmode=plugin -o authorize_all/AuthorizeAll.so authorize_all/plugin.go
 	go build -buildmode=plugin -o header/RequiredHeader.so header/plugin.go

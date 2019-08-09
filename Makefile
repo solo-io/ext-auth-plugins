@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------------
 # Compare dependencies against GlooE
 #----------------------------------------------------------------------------------
-GLOOE_VERSION=0.18.5
+GLOOE_VERSION=dev
 
 .PHONY: compare-deps
 compare-deps: Gopkg.lock GlooE-Gopkg.lock
