@@ -8,6 +8,9 @@ import (
 	"github.com/gogo/googleapis/google/rpc"
 )
 
+type StartFunc func(ctx context.Context) error
+type AuthorizeFunc func(ctx context.Context, request *envoyauthv2.CheckRequest) (*AuthorizationResponse, error)
+
 // Response returned by authorization services to the Gloo ext-auth server
 type AuthorizationResponse struct {
 	// Additional user information
