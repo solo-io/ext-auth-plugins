@@ -31,5 +31,8 @@ print-info:
 #----------------------------------------------------------------------------------
 # Build and publish example plugin implementations
 #----------------------------------------------------------------------------------
+test-example-plugins:
+	$(MAKE) -C examples test-examples
+
 publish-example-plugins:
-	$(MAKE) -C examples
+	$(MAKE) -C examples publish-examples

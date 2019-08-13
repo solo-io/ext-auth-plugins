@@ -20,6 +20,16 @@ steps:
 
 - name: 'gcr.io/$PROJECT_ID/ginkgo:0.1.12'
   entrypoint: 'make'
+  args: ['test-example-plugins']
+  env:
+  - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
+  - 'GOPATH=/workspace/gopath'
+  - 'TAGGED_VERSION=$TAG_NAME'
+  - 'BUILD_ID=$BUILD_ID'
+  dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
+  id: 'test-examples'
+
+- name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
   args: ['publish-example-plugins']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
