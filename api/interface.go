@@ -93,7 +93,11 @@ type ExtAuthPlugin interface {
 // Minimal OK response
 func AuthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
-		CheckResponse: envoyauthv2.CheckResponse{},
+		CheckResponse: envoyauthv2.CheckResponse{
+			Status: &rpc.Status{
+				Code: int32(rpc.OK),
+			},
+		},
 	}
 }
 
