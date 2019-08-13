@@ -4,7 +4,7 @@
 # Export all variables to sub-makes
 export
 
-GLOOE_VERSION=0.18.6
+GLOOE_VERSION := 0.18.6
 BUILD_ID := $(BUILD_ID)
 RELEASE := "true"
 ifeq ($(TAGGED_VERSION),)
@@ -29,7 +29,25 @@ print-info:
 	@echo RELEASE: $(RELEASE)
 
 #----------------------------------------------------------------------------------
-# Build and publish example plugin implementations
+# Build, test and publish example plugins
 #----------------------------------------------------------------------------------
-publish-example-plugins:
-	$(MAKE) -C examples
+EXAMPLES_DIR := examples
+SOURCES := $(shell find . -name "*.go" | grep -v test)
+
+.PHONY: publish-examples
+publish-examples:
+ifeq ($(RELEASE),"true")
+	docker build -t quay.io/solo-io/ext-auth-plugins:$(VERSION) .
+	docker push quay.io/solo-io/ext-auth-plugins:$(VERSION)
+else
+	@echo This is not a release build. Example plugins will not be published.
+endif
+
+.PHONY: build-examples-for-tests
+build-examples-for-tests: $(EXAMPLES_DIR)/authorize_all/AuthorizeAll.so $(EXAMPLES_DIR)/header/RequiredHeader.so
+
+$(EXAMPLES_DIR)/authorize_all/AuthorizeAll.so: $(SOURCES)
+	go build -buildmode=plugin -o $(EXAMPLES_DIR)/authorize_all/AuthorizeAll.so $(EXAMPLES_DIR)/authorize_all/plugin.go
+
+$(EXAMPLES_DIR)/header/RequiredHeader.so: $(SOURCES)
+	go build -buildmode=plugin -o $(EXAMPLES_DIR)/header/RequiredHeader.so $(EXAMPLES_DIR)/header/plugin.go
