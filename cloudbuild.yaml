@@ -3,12 +3,13 @@ steps:
 # This copies files into the proper workspace layout and so must be run before other tasks
 # Subsequent steps should set GOPATH variable to avoid setting up unnecessary sym link
 - name: 'gcr.io/$PROJECT_ID/dep'
-  args: ['ensure']
   id: 'dep'
+  args: ['ensure']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
 
 - name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
+  id: 'compare-dependencies'
   args: ['compare-deps']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
@@ -16,21 +17,29 @@ steps:
   - 'TAGGED_VERSION=$TAG_NAME'
   - 'BUILD_ID=$BUILD_ID'
   dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
-  id: 'compare-dependencies'
 
-- name: 'gcr.io/$PROJECT_ID/ginkgo:0.1.12'
-  entrypoint: 'make'
-  args: ['test-example-plugins']
+- name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
+  id: 'build-examples'
+  args: ['build-examples-for-tests']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
   - 'GOPATH=/workspace/gopath'
   - 'TAGGED_VERSION=$TAG_NAME'
   - 'BUILD_ID=$BUILD_ID'
   dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
+
+- name: 'gcr.io/$PROJECT_ID/ginkgo:0.1.12'
   id: 'test-examples'
+  args: ['-r']
+  env:
+  - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
+  - 'GOPATH=/workspace/gopath'
+  - 'TAGGED_VERSION=$TAG_NAME'
+  - 'BUILD_ID=$BUILD_ID'
+  dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
 
 - name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
-  args: ['publish-example-plugins']
+  args: ['publish-examples']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
   - 'GOPATH=/workspace/gopath'
