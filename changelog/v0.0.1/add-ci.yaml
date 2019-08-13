@@ -1,0 +1,4 @@
+changelog:
+  - type: NEW_FEATURE
+    description: Added CI configuration to project.
+    issueLink: https://github.com/solo-io/ext-auth-plugins/issues/2
