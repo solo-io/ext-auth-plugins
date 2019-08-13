@@ -18,7 +18,8 @@ steps:
   dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
   id: 'compare-dependencies'
 
-- name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
+- name: 'gcr.io/$PROJECT_ID/ginkgo:0.1.12'
+  entrypoint: 'make'
   args: ['publish-example-plugins']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'

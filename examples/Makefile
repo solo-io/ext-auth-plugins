@@ -5,7 +5,7 @@ REPO_ROOT=./..
 SOURCES=$(shell find . -name "*.go" | grep -v test)
 
 .PHONY: publish-examples
-publish-examples: test-examples
+publish-examples:
 	cd $(REPO_ROOT) && docker build -t quay.io/solo-io/ext-auth-plugins:$(VERSION) .
 	docker push quay.io/solo-io/ext-auth-plugins:$(VERSION)
 
