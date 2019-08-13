@@ -1,0 +1,25 @@
+steps:
+# Using dep container from github.com/solo-io/cloud-builders/dep
+# This copies files into the proper workspace layout and so must be run before other tasks
+# Subsequent steps should set GOPATH variable to avoid setting up unnecessary sym link
+- name: 'gcr.io/$PROJECT_ID/dep'
+  args: ['ensure']
+  id: 'dep'
+  env:
+  - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
+
+- name: 'gcr.io/$PROJECT_ID/go-make:0.1.13' &make
+  args: ['compare-deps']
+  env: &envs
+  - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
+  - 'GOPATH=/workspace/gopath'
+  - 'TAGGED_VERSION=$TAG_NAME'
+  - 'BUILD_ID=$BUILD_ID'
+  dir: './gopath/src/github.com/solo-io/ext-auth-plugins' &dir
+  id: 'compare-dependencies'
+
+- name: *make
+  args: ['publish-example-plugins']
+  env: *envs
+  dir: *dir
+  id: 'publish-examples'

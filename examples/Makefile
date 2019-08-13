@@ -3,12 +3,11 @@
 #----------------------------------------------------------------------------------
 REPO_ROOT=./..
 SOURCES=$(shell find . -name "*.go" | grep -v test)
-TAG := test-plugin-1
 
 .PHONY: publish-examples
 publish-examples: test-examples
-	cd $(REPO_ROOT) && docker build -t quay.io/solo-io/ext-auth-plugins:$(TAG) .
-	docker push quay.io/solo-io/ext-auth-plugins:$(TAG)
+	cd $(REPO_ROOT) && docker build -t quay.io/solo-io/ext-auth-plugins:$(VERSION) .
+	docker push quay.io/solo-io/ext-auth-plugins:$(VERSION)
 
 .PHONY: test-examples
 test-examples: build-examples-for-tests
