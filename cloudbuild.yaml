@@ -8,18 +8,22 @@ steps:
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
 
-- name: 'gcr.io/$PROJECT_ID/go-make:0.1.13' &make
+- name: 'gcr.io/$PROJECT_ID/go-make:0.1.13'
   args: ['compare-deps']
-  env: &envs
+  env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
   - 'GOPATH=/workspace/gopath'
   - 'TAGGED_VERSION=$TAG_NAME'
   - 'BUILD_ID=$BUILD_ID'
-  dir: './gopath/src/github.com/solo-io/ext-auth-plugins' &dir
+  dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
   id: 'compare-dependencies'
 
-- name: *make
+- name: 'gcr.io/$PROJECT_ID/go-make:0.1.13'
   args: ['publish-example-plugins']
-  env: *envs
-  dir: *dir
+  env:
+  - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
+  - 'GOPATH=/workspace/gopath'
+  - 'TAGGED_VERSION=$TAG_NAME'
+  - 'BUILD_ID=$BUILD_ID'
+  dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
   id: 'publish-examples'
