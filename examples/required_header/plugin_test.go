@@ -25,9 +25,10 @@ var _ = Describe("Plugin", func() {
 		instance, err := extAuthPlugin.NewConfigInstance(context.TODO())
 		Expect(err).NotTo(HaveOccurred())
 
-		typedInstance, ok := instance.(*impl.RequiredHeaderPluginConfig)
+		typedInstance, ok := instance.(*impl.Config)
 		Expect(ok).To(BeTrue())
 
 		Expect(typedInstance.RequiredHeader).To(BeEmpty())
+		Expect(typedInstance.AllowedValues).To(BeEmpty())
 	})
 })
