@@ -3,7 +3,7 @@
 ARG GO_BUILD_IMAGE
 FROM $GO_BUILD_IMAGE AS build-env
 
-ARG GCFLAGS
+ARG GC_FLAGS
 ARG VERIFY_SCRIPT
 
 # Fail if VERIFY_SCRIPT not set
@@ -19,7 +19,7 @@ WORKDIR /go/src/github.com/solo-io/ext-auth-plugins
 RUN cp -a vendor/. /go/src/ && rm -rf vendor
 
 # Build plugins with CGO enabled
-RUN CGO_ENABLED=1 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -gcflags="$GCFLAGS" -o examples/RequiredHeader.so examples/required_header/plugin.go
+RUN CGO_ENABLED=1 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -gcflags="$GC_FLAGS" -o examples/RequiredHeader.so examples/required_header/plugin.go
 
 # Verify that plugins can be loaded by GlooE
 RUN chmod +x $VERIFY_SCRIPT
