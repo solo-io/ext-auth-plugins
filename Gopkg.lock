@@ -134,8 +134,8 @@
     "contextutils",
   ]
   pruneopts = "UT"
-  revision = "befe24a5a31cc9902941c560ce9e49538bab6c62"
-  version = "v0.9.13"
+  revision = "71704af17a52b1dce01b6bb8bcab447f59e59f07"
+  version = "v0.9.17"
 
 [[projects]]
   digest = "1:3c1a69cdae3501bf75e76d0d86dc6f2b0a7421bc205c0cb7b96b19eed464a34d"
@@ -154,7 +154,7 @@
   version = "v1.1.0"
 
 [[projects]]
-  digest = "1:d9a420eae5f76973feeb733fbf58f6a89173255b63b27a7ae4b2124a73dc6c5b"
+  digest = "1:676160e6a4722b08e0e26b11521d575c2cb2b6f0c679e1ee6178c5d8dee51e5e"
   name = "go.uber.org/zap"
   packages = [
     ".",
@@ -165,8 +165,8 @@
     "zapcore",
   ]
   pruneopts = "UT"
-  revision = "4d45f9617f7d90f7a663ff21c7a4321dbe78098b"
-  version = "v1.9.0"
+  revision = "27376062155ad36be76b0f12cf1572a221d3a48c"
+  version = "v1.10.0"
 
 [[projects]]
   digest = "1:964072608f7bddc0cfe856b6872e5bd2314fe9288f7aeb679845f12be19d97dd"

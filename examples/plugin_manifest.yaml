@@ -1,0 +1,5 @@
+plugins:
+- name: RequiredHeader
+  pluginFileName: RequiredHeader.so
+  exportedSymbolName: Plugin
+  config: {}

@@ -9,11 +9,7 @@ import (
 	"os"
 )
 
-const (
-	depLockFile      = "Gopkg.lock"
-	glooeDepLockFile = "GlooE-Gopkg.lock"
-	errorReportFile  = "mismatched_dependencies.json"
-)
+const errorReportFile = "mismatched_dependencies.json"
 
 type depProjects map[string]dependencyInfo
 
