@@ -1,4 +1,5 @@
-GLOOE_VERSION := 0.18.10
+# TODO(marco): change to actual GlooE version after next release
+GLOOE_VERSION := dev
 BUILD_ID := $(BUILD_ID)
 RELEASE := "true"
 ifeq ($(TAGGED_VERSION),)
