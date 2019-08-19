@@ -54,10 +54,10 @@ build-plugins: $(GLOOE_DIR)/build_env $(GLOOE_DIR)/verify-plugins-linux-amd64
 		.
 
 .PHONY: build-plugins-for-tests
-build-plugins-for-tests: $(EXAMPLES_DIR)/header/RequiredHeader.so
+build-plugins-for-tests: $(EXAMPLES_DIR)/required_header/RequiredHeader.so
 
-$(EXAMPLES_DIR)/header/RequiredHeader.so: $(SOURCES)
-	go build -buildmode=plugin -o $(EXAMPLES_DIR)/header/RequiredHeader.so $(EXAMPLES_DIR)/header/plugin.go
+$(EXAMPLES_DIR)/required_header/RequiredHeader.so: $(SOURCES)
+	go build -buildmode=plugin -o $(EXAMPLES_DIR)/required_header/RequiredHeader.so $(EXAMPLES_DIR)/required_header/plugin.go
 
 
 #----------------------------------------------------------------------------------
