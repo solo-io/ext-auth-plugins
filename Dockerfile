@@ -23,7 +23,7 @@ RUN CGO_ENABLED=1 GOARCH=amd64 GOOS=linux go build -buildmode=plugin -gcflags="$
 
 # Verify that plugins can be loaded by GlooE
 RUN chmod +x $VERIFY_SCRIPT
-RUN $VERIFY_SCRIPT -pluginDir examples -f examples/plugin_manifest.yaml
+RUN $VERIFY_SCRIPT -pluginDir examples -manifest examples/plugin_manifest.yaml
 
 # This stage builds the final image containing just the plugin .so files
 FROM alpine:3.10.1
