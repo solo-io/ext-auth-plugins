@@ -1,4 +1,4 @@
-GLOOE_VERSION := dev
+GLOOE_VERSION := 0.18.10
 BUILD_ID := $(BUILD_ID)
 RELEASE := "true"
 ifeq ($(TAGGED_VERSION),)
@@ -54,10 +54,7 @@ build-plugins: $(GLOOE_DIR)/build_env $(GLOOE_DIR)/verify-plugins-linux-amd64
 		.
 
 .PHONY: build-plugins-for-tests
-build-plugins-for-tests: $(EXAMPLES_DIR)/authorize_all/AuthorizeAll.so $(EXAMPLES_DIR)/header/RequiredHeader.so
-
-$(EXAMPLES_DIR)/authorize_all/AuthorizeAll.so: $(SOURCES)
-	go build -buildmode=plugin -o $(EXAMPLES_DIR)/authorize_all/AuthorizeAll.so $(EXAMPLES_DIR)/authorize_all/plugin.go
+build-plugins-for-tests: $(EXAMPLES_DIR)/header/RequiredHeader.so
 
 $(EXAMPLES_DIR)/header/RequiredHeader.so: $(SOURCES)
 	go build -buildmode=plugin -o $(EXAMPLES_DIR)/header/RequiredHeader.so $(EXAMPLES_DIR)/header/plugin.go

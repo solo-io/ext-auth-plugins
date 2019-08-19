@@ -2,4 +2,9 @@ plugins:
 - name: RequiredHeader
   pluginFileName: RequiredHeader.so
   exportedSymbolName: Plugin
-  config: {}
+  config:
+    RequiredHeader: my-auth-header
+    AllowedValues:
+    - foo
+    - bar
+    - baz

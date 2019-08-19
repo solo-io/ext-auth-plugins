@@ -294,6 +294,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/envoyproxy/go-control-plane/envoy/api/v2/core",
     "github.com/envoyproxy/go-control-plane/envoy/service/auth/v2",
     "github.com/envoyproxy/go-control-plane/envoy/type",
     "github.com/gogo/googleapis/google/rpc",
@@ -301,6 +302,7 @@
     "github.com/onsi/gomega",
     "github.com/pelletier/go-toml",
     "github.com/solo-io/go-utils/contextutils",
+    "go.uber.org/zap",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
