@@ -11,7 +11,12 @@ import (
 	"go.uber.org/zap"
 )
 
-var _ api.ExtAuthPlugin = new(RequiredHeaderPlugin)
+var (
+	UnexpectedConfigError = func(typ interface{}) error {
+		return errors.New(fmt.Sprintf("unexpected config type %T", typ))
+	}
+	_ api.ExtAuthPlugin = new(RequiredHeaderPlugin)
+)
 
 type RequiredHeaderPlugin struct{}
 
@@ -27,7 +32,7 @@ func (p *RequiredHeaderPlugin) NewConfigInstance(ctx context.Context) (interface
 func (p *RequiredHeaderPlugin) GetAuthService(ctx context.Context, configInstance interface{}) (api.AuthService, error) {
 	config, ok := configInstance.(*Config)
 	if !ok {
-		return nil, errors.New(fmt.Sprintf("unexpected config type %T", configInstance))
+		return nil, UnexpectedConfigError(configInstance)
 	}
 
 	logger(ctx).Infow("Parsed RequiredHeaderAuthService config",

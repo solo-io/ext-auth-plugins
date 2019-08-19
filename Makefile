@@ -1,4 +1,4 @@
-GLOOE_VERSION := 0.18.11
+GLOOE_VERSION := dev
 BUILD_ID := $(BUILD_ID)
 RELEASE := "true"
 ifeq ($(TAGGED_VERSION),)
@@ -11,7 +11,7 @@ VERSION ?= $(shell echo $(TAGGED_VERSION) | cut -c 2-)
 # Retrieve GlooE build information
 #----------------------------------------------------------------------------------
 GLOOE_DIR := _glooe
-z := $(shell mkdir -p $(GLOOE_DIR))
+_ := $(shell mkdir -p $(GLOOE_DIR))
 
 .PHONY: get-glooe-info
 get-glooe-info: $(GLOOE_DIR)/Gopkg.lock $(GLOOE_DIR)/verify-plugins-linux-amd64 $(GLOOE_DIR)/build_env

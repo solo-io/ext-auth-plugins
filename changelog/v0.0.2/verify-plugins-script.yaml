@@ -1,4 +1,4 @@
 changelog:
 - type: NEW_FEATURE
-  description: Verify plugin compatibilioty with GlooE during build.
+  description: Verify plugin compatibility with GlooE during build.
   issueLink: https://github.com/solo-io/ext-auth-plugins/issues/5
