@@ -1,4 +1,4 @@
-GLOOE_VERSION := dev
+GLOOE_VERSION := 0.18.12
 BUILD_ID := $(BUILD_ID)
 RELEASE := "true"
 ifeq ($(TAGGED_VERSION),)
@@ -47,7 +47,7 @@ endef
 
 .PHONY: build-plugins
 build-plugins: $(GLOOE_DIR)/build_env $(GLOOE_DIR)/verify-plugins-linux-amd64
-	docker build -t quay.io/solo-io/ext-auth-plugins:$(VERSION) \
+	docker build --no-cache -t quay.io/solo-io/ext-auth-plugins:$(VERSION) \
 		--build-arg GO_BUILD_IMAGE=$(call get_glooe_var,GO_BUILD_IMAGE) \
 		--build-arg GC_FLAGS=$(call get_glooe_var,GC_FLAGS) \
 		--build-arg VERIFY_SCRIPT=$(GLOOE_DIR)/verify-plugins-linux-amd64 \
