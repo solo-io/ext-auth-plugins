@@ -42,7 +42,7 @@ EXAMPLES_DIR := examples
 SOURCES := $(shell find . -name "*.go" | grep -v test)
 
 define get_glooe_var
-$(shell grep $(1) $(GLOOE_DIR)/build_env | cut -d '=' -f 2-)
+$(shell awk -F"=" '/$(1)/ {print $2}' $(GLOOE_DIR)/build_env)
 endef
 
 .PHONY: build-plugins
