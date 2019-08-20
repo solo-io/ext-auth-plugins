@@ -58,12 +58,11 @@ type ExtAuthPlugin interface {
 	//           configs:
 	//             extauth:
 	//               plugin_auth:
-	//  			   plugins:
-	//                 - name: MyAuthPlugin
-	//                   config:
-	//                     some_key: value-1
-	//                     some_struct:
-	//                       another_key: value-2
+	//                 name: MyAuthPlugin
+	//                 config:
+	//                   some_key: value-1
+	//                   some_struct:
+	//                     another_key: value-2
 	//
 	// the `NewConfigInstance` function on your `ExtAuthPlugin` implementation should return a pointer to
 	// the following Go struct:
