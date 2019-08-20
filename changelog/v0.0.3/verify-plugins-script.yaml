@@ -1,0 +1,5 @@
+changelog:
+- type: NON_USER_FACING
+  description: >
+    Move example plugins and build tools to [new repo](https://github.com/solo-io/ext-auth-plugin-examples).
+    This is needed to avoid circular dependencies between GlooE and this repo.
