@@ -1,5 +1,4 @@
 .idea
 vendor
 **.so
-GlooE-Gopkg.lock
-mismatched_dependencies.json
+_glooe

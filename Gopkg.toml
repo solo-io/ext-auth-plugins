@@ -8,7 +8,7 @@
 
 [[constraint]]
   name = "github.com/solo-io/go-utils"
-  version = "=v0.9.13"
+  version = "=v0.9.17"
 
 [[constraint]]
   name = "github.com/envoyproxy/go-control-plane"
@@ -20,7 +20,7 @@
 
 [[override]]
   name = "go.uber.org/zap"
-  version = "=v1.9.0"
+  version = "=v1.10.0"
 
 [[override]]
   name = "go.uber.org/atomic"

@@ -69,7 +69,7 @@ type ExtAuthPlugin interface {
 	//
 	//   type MyPluginConfig struct {
 	//     SomeKey string
-	//	   SomeStruct NestedConfig
+	//     SomeStruct NestedConfig
 	//   }
 	//
 	// where `NestedConfig` is:

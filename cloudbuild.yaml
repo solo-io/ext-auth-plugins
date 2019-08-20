@@ -1,7 +1,7 @@
 steps:
 # Using dep container from github.com/solo-io/cloud-builders/dep
-# This copies files into the proper workspace layout and so must be run before other tasks
-# Subsequent steps should set GOPATH variable to avoid setting up unnecessary sym link
+# This copies files into the proper workspace layout and so must be run before other tasks.
+# Subsequent steps must set the $GOPATH env variable.
 - name: 'gcr.io/$PROJECT_ID/dep'
   id: 'dep'
   args: ['ensure']
@@ -19,8 +19,8 @@ steps:
   dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
 
 - name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
-  id: 'build-examples'
-  args: ['build-examples-for-tests']
+  id: 'build-plugins-for-tests'
+  args: ['build-plugins-for-tests']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
   - 'GOPATH=/workspace/gopath'
@@ -29,8 +29,18 @@ steps:
   dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
 
 - name: 'gcr.io/$PROJECT_ID/ginkgo:0.1.12'
-  id: 'test-examples'
+  id: 'test-plugins'
   args: ['-r']
+  env:
+  - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
+  - 'GOPATH=/workspace/gopath'
+  - 'TAGGED_VERSION=$TAG_NAME'
+  - 'BUILD_ID=$BUILD_ID'
+  dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
+
+- name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
+  id: 'build-plugins'
+  args: ['build-plugins']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
   - 'GOPATH=/workspace/gopath'
@@ -45,14 +55,14 @@ steps:
   id: 'docker-login'
 
 - name: 'gcr.io/$PROJECT_ID/go-make:0.1.12'
-  args: ['publish-examples']
+  args: ['release-plugins']
   env:
   - 'PROJECT_ROOT=github.com/solo-io/ext-auth-plugins'
   - 'GOPATH=/workspace/gopath'
   - 'TAGGED_VERSION=$TAG_NAME'
   - 'BUILD_ID=$BUILD_ID'
   dir: './gopath/src/github.com/solo-io/ext-auth-plugins'
-  id: 'publish-examples'
+  id: 'release-plugins'
 
 secrets:
 - kmsKeyName: projects/solo-public/locations/global/keyRings/build/cryptoKeys/build-key

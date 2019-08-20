@@ -5,7 +5,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/solo-io/ext-auth-plugins/api"
-	api2 "github.com/solo-io/ext-auth-plugins/examples/header/api"
+	impl "github.com/solo-io/ext-auth-plugins/examples/required_header/pkg"
 	"plugin"
 )
 
@@ -25,9 +25,10 @@ var _ = Describe("Plugin", func() {
 		instance, err := extAuthPlugin.NewConfigInstance(context.TODO())
 		Expect(err).NotTo(HaveOccurred())
 
-		typedInstance, ok := instance.(*api2.RequiredHeaderPluginConfig)
+		typedInstance, ok := instance.(*impl.Config)
 		Expect(ok).To(BeTrue())
 
 		Expect(typedInstance.RequiredHeader).To(BeEmpty())
+		Expect(typedInstance.AllowedValues).To(BeEmpty())
 	})
 })
