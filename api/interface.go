@@ -19,6 +19,26 @@ type AuthorizationResponse struct {
 	CheckResponse envoyauthv2.CheckResponse
 }
 
+type AuthorizationRequest struct {
+	// The request that needs to be authorized
+	CheckResponse *envoyauthv2.CheckResponse
+	State         map[string]interface{}
+}
+
+func (a *AuthorizationRequest) SetState(key string, value interface{}) {
+	if a.State == nil {
+		a.State = make(map[string]interface{})
+	}
+	a.State[key] = value
+}
+
+func (a *AuthorizationRequest) GetState(key string) interface{} {
+	if a.State == nil {
+		return nil
+	}
+	return a.State[key]
+}
+
 // TODO(marco): consider moving this to the ext-auth-service
 // Can be used to set an additional header on authorized requests.
 type UserInfo struct {
@@ -34,7 +54,7 @@ type AuthService interface {
 
 	// Each time a request hits the auth service, this function will be invoked to decide whether nor not to authorize it.
 	// If a non-nil error is returned, the request will be denied.
-	Authorize(ctx context.Context, request *envoyauthv2.CheckRequest) (*AuthorizationResponse, error)
+	Authorize(ctx context.Context, request *AuthorizationRequest) (*AuthorizationResponse, error)
 }
 
 // External authorization plugins must implement this interface
