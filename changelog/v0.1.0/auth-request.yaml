@@ -1,0 +1,4 @@
+changelog:
+- type: BREAKING_CHANGE
+  description: Making the plugin interface take an AuthRequest and not CheckRequest. This enables state sharing.
+  issueLink: https://github.com/solo-io/ext-auth-plugins/pull/8
