@@ -9,7 +9,7 @@ import (
 )
 
 type StartFunc func(ctx context.Context) error
-type AuthorizeFunc func(ctx context.Context, request *envoyauthv2.CheckRequest) (*AuthorizationResponse, error)
+type AuthorizeFunc func(ctx context.Context, request *AuthorizationRequest) (*AuthorizationResponse, error)
 
 // Response returned by authorization services to the Gloo ext-auth server
 type AuthorizationResponse struct {
@@ -21,8 +21,8 @@ type AuthorizationResponse struct {
 
 type AuthorizationRequest struct {
 	// The request that needs to be authorized
-	CheckResponse *envoyauthv2.CheckResponse
-	State         map[string]interface{}
+	CheckRequest *envoyauthv2.CheckRequest
+	State        map[string]interface{}
 }
 
 func (a *AuthorizationRequest) SetState(key string, value interface{}) {
