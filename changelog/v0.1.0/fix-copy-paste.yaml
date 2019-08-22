@@ -1,0 +1,4 @@
+changelog:
+- type: FIX
+  description: Fix a copy paste error
+  issueLink: https://github.com/solo-io/ext-auth-plugins/pull/9
