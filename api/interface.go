@@ -5,7 +5,8 @@ import (
 
 	envoyauthv2 "github.com/envoyproxy/go-control-plane/envoy/service/auth/v2"
 	envoytype "github.com/envoyproxy/go-control-plane/envoy/type"
-	"github.com/gogo/googleapis/google/rpc"
+	"google.golang.org/genproto/googleapis/rpc/status"
+	"google.golang.org/grpc/codes"
 )
 
 type StartFunc func(ctx context.Context) error
@@ -115,8 +116,8 @@ type ExtAuthPlugin interface {
 func AuthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
 		CheckResponse: envoyauthv2.CheckResponse{
-			Status: &rpc.Status{
-				Code: int32(rpc.OK),
+			Status: &status.Status{
+				Code: int32(codes.OK),
 			},
 		},
 	}
@@ -126,8 +127,8 @@ func AuthorizedResponse() *AuthorizationResponse {
 func UnauthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
 		CheckResponse: envoyauthv2.CheckResponse{
-			Status: &rpc.Status{
-				Code: int32(rpc.PERMISSION_DENIED),
+			Status: &status.Status{
+				Code: int32(codes.PermissionDenied),
 			},
 		},
 	}
