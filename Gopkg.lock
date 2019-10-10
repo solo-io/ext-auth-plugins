@@ -2,7 +2,7 @@
 
 
 [[projects]]
-  digest = "1:7214e04012a19e4797878709eaac41e64d535cac3c266514b50bdabf940e2a4c"
+  digest = "1:c62982c3f5c0e8b449bed24bf572ba926f47ddced4ae4f593c37895aa674942d"
   name = "github.com/envoyproxy/go-control-plane"
   packages = [
     "envoy/api/v2/core",
@@ -10,8 +10,8 @@
     "envoy/type",
   ]
   pruneopts = "UT"
-  revision = "0f0598e8dab0c0306119ca6fff632b0a672cbfa1"
-  version = "v0.8.2"
+  revision = "52b167a709f111e6298136064bbaae43419ab22f"
+  version = "v0.9.0"
 
 [[projects]]
   digest = "1:743f8008a7fed04ef0d52261aef346766bbd5b3e360b90296d85289f8ef5c2e2"
@@ -29,12 +29,10 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:c23ef5b1fa68d209f3a299f58f3de6ecf126c1724a8c2d28e7930c291eb32dd5"
+  digest = "1:4107f4e81e8fd2e80386b4ed56b05e3a1fe26ecc7275fe80bb9c3a80a7344ff4"
   name = "github.com/gogo/protobuf"
   packages = [
-    "gogoproto",
     "proto",
-    "protoc-gen-gogo/descriptor",
     "sortkeys",
     "types",
   ]
@@ -43,7 +41,7 @@
   version = "v1.2.1"
 
 [[projects]]
-  digest = "1:5d1b5a25486fc7d4e133646d834f6fca7ba1cef9903d40e7aa786c41b89e9e91"
+  digest = "1:72856926f8208767b837bf51e3373f49139f61889b67dc7fd3c2a0fd711e3f7a"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
@@ -51,7 +49,10 @@
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
+    "ptypes/empty",
+    "ptypes/struct",
     "ptypes/timestamp",
+    "ptypes/wrappers",
   ]
   pruneopts = "UT"
   revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
