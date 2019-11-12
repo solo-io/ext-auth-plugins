@@ -60,31 +60,24 @@ type AuthService interface {
 
 // External authorization plugins must implement this interface
 type ExtAuthPlugin interface {
-	// Gloo will deserialize the external authorization plugin configuration defined on your Virtual Hosts into the
+	// Gloo will deserialize the external authorization plugin configuration defined on your AuthConfig into the
 	// type returned by this function. The returned type MUST be a pointer.
 	//
 	// For example, given the following plugin configuration:
 	//
-	//   apiVersion: gateway.solo.io/v1
-	//   kind: VirtualService
-	//   metadata:
-	//     name: test-auth
-	//     namespace: gloo-system
-	//   spec:
-	//     virtualHost:
-	//       domains: [...]
-	//       routes: [...]
-	//       virtualHostPlugins:
-	//         extensions:
-	//           configs:
-	//             extauth:
-	//               plugin_auth:
-	//                 plugins:
-	//                 - name: MyAuthPlugin
-	//                   config:
-	//                     some_key: value-1
-	//                     some_struct:
-	//                       another_key: value-2
+	//  apiVersion: enterprise.gloo.solo.io/v1
+	//  kind: AuthConfig
+	//  metadata:
+	//    name: plugin-auth
+	//    namespace: gloo-system
+	//  spec:
+	//    configs:
+	//    - pluginAuth:
+	//        name: MyAuthPlugin
+	//        config:
+	//          someKey: value-1
+	//          someStruct:
+	//            anotherKey: value-2
 	//
 	// the `NewConfigInstance` function on your `ExtAuthPlugin` implementation should return a pointer to
 	// the following Go struct:
