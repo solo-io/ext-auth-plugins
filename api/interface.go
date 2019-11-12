@@ -66,11 +66,11 @@ type ExtAuthPlugin interface {
 	// For example, given the following plugin configuration:
 	//
 	//  apiVersion: enterprise.gloo.solo.io/v1
-	//	kind: AuthConfig
-	//	metadata:
+	//  kind: AuthConfig
+	//  metadata:
 	//    name: plugin-auth
 	//    namespace: gloo-system
-	//	spec:
+	//  spec:
 	//    configs:
 	//    - pluginAuth:
 	//        name: MyAuthPlugin
