@@ -116,12 +116,30 @@ func AuthorizedResponse() *AuthorizationResponse {
 	}
 }
 
-// Minimal DENIED response
+// Minimal FORBIDDEN (403) response
 func UnauthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
 		CheckResponse: envoyauthv2.CheckResponse{
 			Status: &status.Status{
 				Code: int32(codes.PermissionDenied),
+			},
+		},
+	}
+}
+
+// Minimal UNAUTHORIZED (401) response
+func UnauthenticatedResponse() *AuthorizationResponse {
+	return &AuthorizationResponse{
+		CheckResponse: envoyauthv2.CheckResponse{
+			Status: &status.Status{
+				Code: int32(codes.Unauthenticated),
+			},
+			HttpResponse: &envoyauthv2.CheckResponse_DeniedResponse{
+				DeniedResponse: &envoyauthv2.DeniedHttpResponse{
+					Status: &envoytype.HttpStatus{
+						Code: envoytype.StatusCode_Unauthorized,
+					},
+				},
 			},
 		},
 	}
