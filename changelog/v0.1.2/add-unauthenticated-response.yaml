@@ -1,0 +1,6 @@
+changelog:
+- type: NEW_FEATURE
+  description: Add a utility function to get a basic `401 Unauthorized` response.
+  issueLink: https://github.com/solo-io/ext-auth-plugins/issues/12
+- type: NON_USER_FACING
+  description: Switch to [Go Modules](https://blog.golang.org/using-go-modules) to manage dependencies.
