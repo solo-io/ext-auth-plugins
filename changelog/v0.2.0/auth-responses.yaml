@@ -1,0 +1,4 @@
+changelog:
+- type: NEW_FEATURE
+  description: Add optional string messages to all Auth Response functions.
+  issueLink: https://github.com/solo-io/ext-auth-plugins/issues/13

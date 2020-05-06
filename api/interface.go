@@ -106,33 +106,36 @@ type ExtAuthPlugin interface {
 }
 
 // Minimal OK response
-func AuthorizedResponse() *AuthorizationResponse {
+func AuthorizedResponse(message string) *AuthorizationResponse {
 	return &AuthorizationResponse{
 		CheckResponse: envoyauthv2.CheckResponse{
 			Status: &status.Status{
-				Code: int32(codes.OK),
+				Code:    int32(codes.OK),
+				Message: message,
 			},
 		},
 	}
 }
 
 // Minimal FORBIDDEN (403) response
-func UnauthorizedResponse() *AuthorizationResponse {
+func UnauthorizedResponse(message string) *AuthorizationResponse {
 	return &AuthorizationResponse{
 		CheckResponse: envoyauthv2.CheckResponse{
 			Status: &status.Status{
-				Code: int32(codes.PermissionDenied),
+				Code:    int32(codes.PermissionDenied),
+				Message: message,
 			},
 		},
 	}
 }
 
 // Minimal UNAUTHORIZED (401) response
-func UnauthenticatedResponse() *AuthorizationResponse {
+func UnauthenticatedResponse(message string) *AuthorizationResponse {
 	return &AuthorizationResponse{
 		CheckResponse: envoyauthv2.CheckResponse{
 			Status: &status.Status{
-				Code: int32(codes.Unauthenticated),
+				Code:    int32(codes.Unauthenticated),
+				Message: message,
 			},
 			HttpResponse: &envoyauthv2.CheckResponse_DeniedResponse{
 				DeniedResponse: &envoyauthv2.DeniedHttpResponse{
@@ -145,8 +148,8 @@ func UnauthenticatedResponse() *AuthorizationResponse {
 	}
 }
 
-func InternalServerErrorResponse() *AuthorizationResponse {
-	resp := UnauthorizedResponse()
+func InternalServerErrorResponse(message string) *AuthorizationResponse {
+	resp := UnauthorizedResponse(message)
 	resp.CheckResponse.HttpResponse = &envoyauthv2.CheckResponse_DeniedResponse{
 		DeniedResponse: &envoyauthv2.DeniedHttpResponse{
 			Status: &envoytype.HttpStatus{
