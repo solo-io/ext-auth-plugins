@@ -1,6 +1,6 @@
 module github.com/solo-io/ext-auth-plugins
 
-go 1.15
+go 1.13
 
 require (
 	github.com/envoyproxy/go-control-plane v0.9.0
