@@ -3,8 +3,8 @@ package api
 import (
 	"context"
 
-	envoyauthv2 "github.com/envoyproxy/go-control-plane/envoy/service/auth/v2"
-	envoytype "github.com/envoyproxy/go-control-plane/envoy/type"
+	envoy_service_auth_v3 "github.com/envoyproxy/go-control-plane/envoy/service/auth/v3"
+	envoy_type_v3 "github.com/envoyproxy/go-control-plane/envoy/type/v3"
 	"google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"
 )
@@ -17,12 +17,12 @@ type AuthorizationResponse struct {
 	// Additional user information
 	UserInfo UserInfo
 	// The result of the authorization process that will be sent back to Envoy
-	CheckResponse envoyauthv2.CheckResponse
+	CheckResponse envoy_service_auth_v3.CheckResponse
 }
 
 type AuthorizationRequest struct {
 	// The request that needs to be authorized
-	CheckRequest *envoyauthv2.CheckRequest
+	CheckRequest *envoy_service_auth_v3.CheckRequest
 	State        map[string]interface{}
 }
 
@@ -108,7 +108,7 @@ type ExtAuthPlugin interface {
 // Minimal OK response
 func AuthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
-		CheckResponse: envoyauthv2.CheckResponse{
+		CheckResponse: envoy_service_auth_v3.CheckResponse{
 			Status: &status.Status{
 				Code: int32(codes.OK),
 			},
@@ -119,7 +119,7 @@ func AuthorizedResponse() *AuthorizationResponse {
 // Minimal FORBIDDEN (403) response
 func UnauthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
-		CheckResponse: envoyauthv2.CheckResponse{
+		CheckResponse: envoy_service_auth_v3.CheckResponse{
 			Status: &status.Status{
 				Code: int32(codes.PermissionDenied),
 			},
@@ -130,14 +130,14 @@ func UnauthorizedResponse() *AuthorizationResponse {
 // Minimal UNAUTHORIZED (401) response
 func UnauthenticatedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
-		CheckResponse: envoyauthv2.CheckResponse{
+		CheckResponse: envoy_service_auth_v3.CheckResponse{
 			Status: &status.Status{
 				Code: int32(codes.Unauthenticated),
 			},
-			HttpResponse: &envoyauthv2.CheckResponse_DeniedResponse{
-				DeniedResponse: &envoyauthv2.DeniedHttpResponse{
-					Status: &envoytype.HttpStatus{
-						Code: envoytype.StatusCode_Unauthorized,
+			HttpResponse: &envoy_service_auth_v3.CheckResponse_DeniedResponse{
+				DeniedResponse: &envoy_service_auth_v3.DeniedHttpResponse{
+					Status: &envoy_type_v3.HttpStatus{
+						Code: envoy_type_v3.StatusCode_Unauthorized,
 					},
 				},
 			},
@@ -147,10 +147,10 @@ func UnauthenticatedResponse() *AuthorizationResponse {
 
 func InternalServerErrorResponse() *AuthorizationResponse {
 	resp := UnauthorizedResponse()
-	resp.CheckResponse.HttpResponse = &envoyauthv2.CheckResponse_DeniedResponse{
-		DeniedResponse: &envoyauthv2.DeniedHttpResponse{
-			Status: &envoytype.HttpStatus{
-				Code: envoytype.StatusCode_InternalServerError,
+	resp.CheckResponse.HttpResponse = &envoy_service_auth_v3.CheckResponse_DeniedResponse{
+		DeniedResponse: &envoy_service_auth_v3.DeniedHttpResponse{
+			Status: &envoy_type_v3.HttpStatus{
+				Code: envoy_type_v3.StatusCode_InternalServerError,
 			},
 		},
 	}
