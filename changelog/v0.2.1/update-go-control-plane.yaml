@@ -2,5 +2,5 @@ changelog:
   - type: DEPENDENCY_BUMP
     dependencyOwner: envoyproxy
     dependencyRepo: go-control-plane
-    dependencyTag: v0.9.0
-    description: Update go-control-plane to 0.9.0
+    dependencyTag: v0.9.8
+    description: Update go-control-plane to 0.9.8
