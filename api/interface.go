@@ -16,6 +16,8 @@ type AuthorizeFunc func(ctx context.Context, request *AuthorizationRequest) (*Au
 type AuthorizationResponse struct {
 	// Additional user information
 	UserInfo UserInfo
+	// Additional user information
+	ApiProductInfo ApiProductInfo
 	// The result of the authorization process that will be sent back to Envoy
 	CheckResponse envoy_service_auth_v3.CheckResponse
 }
@@ -44,6 +46,11 @@ func (a *AuthorizationRequest) GetState(key string) interface{} {
 // Can be used to set an additional header on authorized requests.
 type UserInfo struct {
 	UserID string
+}
+
+type ApiProductInfo struct {
+	UsagePlan string
+	ApiId     string
 }
 
 // AuthService instances are responsible for authorizing individual requests.
