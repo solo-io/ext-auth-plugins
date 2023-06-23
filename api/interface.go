@@ -50,7 +50,6 @@ type UserInfo struct {
 
 type ApiProductInfo struct {
 	UsagePlan string
-	ApiId     string
 }
 
 // AuthService instances are responsible for authorizing individual requests.
