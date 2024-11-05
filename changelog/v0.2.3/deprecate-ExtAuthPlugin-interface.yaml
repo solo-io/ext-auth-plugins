@@ -1,5 +1,5 @@
 changelog:
 - type: FIX
-  description: Mark ExtAuthPlugin interface as deprecated as we encourage users to use the safer alternative, [ExtAuth Passthrough](https://docs.solo.io/gloo-edge/latest/guides/security/auth/extauth/passthrough_auth/).
+  description: Mark ExtAuthPlugin interface as deprecated as we encourage users to use the safer alternative, [Passthrough Auth](https://docs.solo.io/gloo-edge/latest/guides/security/auth/extauth/passthrough_auth/).
   issueLink: https://github.com/solo-io/solo-projects/issues/6961
   resolvesIssue: false
