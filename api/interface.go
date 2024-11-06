@@ -64,6 +64,7 @@ type AuthService interface {
 	Authorize(ctx context.Context, request *AuthorizationRequest) (*AuthorizationResponse, error)
 }
 
+// Deprecated: Prefer Passthrough Auth https://docs.solo.io/gloo-edge/latest/guides/security/auth/extauth/passthrough_auth/
 // External authorization plugins must implement this interface
 type ExtAuthPlugin interface {
 	// Gloo will deserialize the external authorization plugin configuration defined on your AuthConfig into the
