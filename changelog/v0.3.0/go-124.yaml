@@ -1,0 +1,8 @@
+changelog:
+- type: BREAKING_CHANGE
+  description: Bumped the Go version to 1.24.0
+  dependencyOwner: golang
+  dependencyRepo: go
+  dependencyTag: v1.24.0
+  issueLink: https://github.com/solo-io/solo-projects/issues/7609
+  resolvesIssue: false
