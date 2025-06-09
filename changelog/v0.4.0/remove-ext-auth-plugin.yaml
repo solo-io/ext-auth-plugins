@@ -1,5 +1,6 @@
 changelog:
 - type: BREAKING_CHANGE
   description: Removed the `ExtAuthPlugin` interface.
+  issueLink: https://github.com/solo-io/solo-projects/issues/6962
   resolvesIssue: false
 
