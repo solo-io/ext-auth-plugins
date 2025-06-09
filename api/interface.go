@@ -64,54 +64,6 @@ type AuthService interface {
 	Authorize(ctx context.Context, request *AuthorizationRequest) (*AuthorizationResponse, error)
 }
 
-// Deprecated: Prefer Passthrough Auth https://docs.solo.io/gloo-edge/latest/guides/security/auth/extauth/passthrough_auth/
-// External authorization plugins must implement this interface
-type ExtAuthPlugin interface {
-	// Gloo will deserialize the external authorization plugin configuration defined on your AuthConfig into the
-	// type returned by this function. The returned type MUST be a pointer.
-	//
-	// For example, given the following plugin configuration:
-	//
-	//  apiVersion: enterprise.gloo.solo.io/v1
-	//  kind: AuthConfig
-	//  metadata:
-	//    name: plugin-auth
-	//    namespace: gloo-system
-	//  spec:
-	//    configs:
-	//    - pluginAuth:
-	//        name: MyAuthPlugin
-	//        config:
-	//          someKey: value-1
-	//          someStruct:
-	//            anotherKey: value-2
-	//
-	// the `NewConfigInstance` function on your `ExtAuthPlugin` implementation should return a pointer to
-	// the following Go struct:
-	//
-	//   type MyPluginConfig struct {
-	//     SomeKey string
-	//     SomeStruct NestedConfig
-	//   }
-	//
-	// where `NestedConfig` is:
-	//
-	//   type NestedConfig struct {
-	//     AnotherKey string
-	//   }
-	//
-	// When Gloo invokes this fun function during plugin initialization, it will pass in a context. The context will
-	// be cancelled whenever Gloo detects a change in the overall auth configuration and consequently re-initializes
-	// all the auth plugins.
-	NewConfigInstance(ctx context.Context) (configInstance interface{}, err error)
-
-	// Returns an authorization service instance.
-	// The input context is the same as the one passed to `NewConfigInstance` and the same considerations apply.
-	// The input configInstance is the same one returned by the `NewConfigInstance` after the plugin configuration has
-	// been deserialized into it.
-	GetAuthService(ctx context.Context, configInstance interface{}) (AuthService, error)
-}
-
 // Minimal OK response
 func AuthorizedResponse() *AuthorizationResponse {
 	return &AuthorizationResponse{
